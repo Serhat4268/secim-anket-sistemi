@@ -14,4 +14,5 @@ PARTI_LISTESI = [
     "TİP",
     "Yeniden Refah Partisi",
     "Saadet Partisi",
+    "BBP",
 ]

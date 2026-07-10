@@ -10,5 +10,6 @@ export const PARTI_LISTESI = [
   { ad: "Zafer Partisi", renk: "#5a5a5a" },
   { ad: "TİP", renk: "#c0392b" },
   { ad: "Yeniden Refah Partisi", renk: "#3f8f4f" },
-  { ad: "Saadet Partisi", renk: "#caa23a" }
+  { ad: "Saadet Partisi", renk: "#caa23a" },
+  { ad: "BBP", renk: "#1a4b8c" }
 ];
