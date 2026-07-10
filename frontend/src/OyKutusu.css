@@ -1,0 +1,34 @@
+/* Kendi oyunu göster kutusu */
+.kendi-oy-kutusu {
+  background: var(--zemin);
+  border: 1px solid var(--cizgi);
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.kendi-oy-baslik {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kagit-soluk);
+  margin: 0;
+}
+
+.kendi-oy-parti {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+}
+
+.kendi-oy-detay {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--kagit-soluk);
+  font-family: var(--yazi-kod);
+}
