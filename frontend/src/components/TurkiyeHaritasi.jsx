@@ -7,7 +7,7 @@ import { ilAdiniEsle, ilceli, VEKIL_SAYILARI, BOLGELI_ILLER } from "../data/veki
 import { PARTI_LISTESI } from "../data/partiler.js";
 import { API_URL } from "../api.js";
 
-const GEOJSON_URL = "https://raw.githubusercontent.com/alpers/Turkey-Maps-GeoJSON/master/tr-cities.json";
+const GEOJSON_URL = "/turkiye-iller.json";
 const W = 1000, H = 500;
 
 function renkBul(ad) {

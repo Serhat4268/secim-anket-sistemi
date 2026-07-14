@@ -67,11 +67,6 @@ export default function UlusalSonuclar() {
               </tbody>
             </table>
           )}
-
-          <p className="sonuc-not" style={{ marginTop: 10 }}>
-            Her bölge D'Hondt ile ayrı hesaplanır. Birisi oy kullandığında
-            WebSocket ile anında güncellenir.
-          </p>
         </div>
       )}
     </aside>
