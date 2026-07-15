@@ -27,7 +27,7 @@ load_dotenv()
 SISTEM_MAIL  = os.environ.get("SISTEM_MAIL")
 SISTEM_SIFRE = os.environ.get("SISTEM_SIFRE")
 KOD_GECERLILIK_DAKIKA = 10
-TOKEN_GECERLILIK_SAAT = 24
+TOKEN_GECERLILIK_SAAT = 8
 
 DB_CONFIG = {
     "host":     os.environ.get("DB_HOST", "localhost"),
