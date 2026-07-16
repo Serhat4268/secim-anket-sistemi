@@ -25,4 +25,5 @@ export const api = {
   sonuclarGetir:    (bolge)             => istek(`/api/sonuclar/${encodeURIComponent(bolge)}`),
   ulusalSonuclar:   ()                  => istek("/api/ulusal-sonuclar"),
   ilSonuclariGetir: (il) => istek(`/api/il-sonuclari/${encodeURIComponent(il)}`),
+  tumIlSonuclari:   ()   => istek("/api/tum-il-sonuclari"),
 };

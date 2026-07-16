@@ -8,6 +8,7 @@ import Dogrulama       from "./components/Dogrulama.jsx";
 import Giris           from "./components/Giris.jsx";
 import OylamaEkrani    from "./components/OylamaEkrani.jsx";
 import SifreSifirla    from "./components/SifreSifirla.jsx";
+import IlDetaylari     from "./components/IlDetaylari.jsx";
 
 const KimlikContext = createContext(null);
 export const useKimlik = () => useContext(KimlikContext);
@@ -47,9 +48,14 @@ function UstSerit() {
   const navigate = useNavigate();
   return (
     <header className="ust-serit">
-      <Link to="/" className="marka">
-        Seçim Anket Sistemi <small>Türkiye</small>
-      </Link>
+      <div className="ust-serit-sol">
+        <Link to="/" className="marka">
+          Seçim Anket Sistemi <small>Türkiye</small>
+        </Link>
+        <Link to="/il-detaylari" className="il-detay-dugmesi">
+          İllerin Detaylı Sonuçları
+        </Link>
+      </div>
       <div className="ust-serit-sag">
         {token ? (
           <>
@@ -77,6 +83,7 @@ export default function App() {
           <Route path="/giris"         element={<Giris />} />
           <Route path="/sifre-sifirla" element={<SifreSifirla />} />
           <Route path="/"              element={<TurkiyeHaritasi />} />
+          <Route path="/il-detaylari"  element={<IlDetaylari />} />
           <Route path="/oylama/:bolge" element={
             <KorumaliRota><OylamaEkrani /></KorumaliRota>
           } />

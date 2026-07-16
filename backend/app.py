@@ -312,7 +312,7 @@ def oy_kullan():
     socketio.emit("ulusal_guncellendi", {})
     return jsonify({"basarili": True, "mesaj": "Oyunuz kaydedildi."})
 
-def _sonuc_hesapla(rows, vekil_sayisi):
+def _sonuc_hesapla(rows, vekil_sayisi, sirala=True):
     oy_sayilari = {p: 0 for p in PARTI_LISTESI}
     for r in rows:
         if r["secim"] in oy_sayilari:
@@ -325,7 +325,8 @@ def _sonuc_hesapla(rows, vekil_sayisi):
         liste.append({"parti": p, "oy": oy,
                       "yuzde": round(oy/toplam*100, 1) if toplam else 0,
                       "koltuk": koltuklar.get(p, 0)})
-    liste.sort(key=lambda x: (-x["koltuk"], -x["oy"]))
+    if sirala:
+        liste.sort(key=lambda x: (-x["koltuk"], -x["oy"]))
     return toplam, liste
 
 @app.route("/api/sonuclar/<bolge>")
@@ -395,6 +396,29 @@ def il_sonuclari(il):
     toplam, liste = _sonuc_hesapla(rows, toplam_vekil)
     return jsonify({"basarili": True, "il": il,
                     "toplam_oy": toplam, "sonuclar": liste})
+
+@app.route("/api/tum-il-sonuclari")
+def tum_il_sonuclari():
+    """81 ilin tamamı için parti sıralaması sabit (PARTI_LISTESI) sonuç listesi döner."""
+    bolge_il  = {b: il for il, bolgeler in BOLGELI_ILLER.items() for b in bolgeler}
+    tum_iller = [il for il in VEKIL_SAYILARI if il not in bolge_il] + list(BOLGELI_ILLER)
+
+    with cursor() as c:
+        c.execute("SELECT bolge, secim, COUNT(*) AS adet FROM oylar GROUP BY bolge, secim")
+        rows = c.fetchall()
+
+    il_rows = defaultdict(list)
+    for r in rows:
+        il_rows[bolge_il.get(r["bolge"], r["bolge"])].append(r)
+
+    iller = []
+    for il in tum_iller:
+        bolgeler = BOLGELI_ILLER.get(il, [il])
+        vekil = sum(VEKIL_SAYILARI[b] for b in bolgeler)
+        toplam, liste = _sonuc_hesapla(il_rows.get(il, []), vekil, sirala=False)
+        iller.append({"il": il, "vekil_sayisi": vekil, "toplam_oy": toplam, "sonuclar": liste})
+
+    return jsonify({"basarili": True, "iller": iller})
 
 if __name__ == "__main__":
     init_db()
